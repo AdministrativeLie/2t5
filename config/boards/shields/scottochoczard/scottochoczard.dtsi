@@ -87,7 +87,7 @@
             ;
 
         
-        };
+    };
 
     &i2c0 { // Adjust this reference to match the base DTS configuration
         status = "okay";
