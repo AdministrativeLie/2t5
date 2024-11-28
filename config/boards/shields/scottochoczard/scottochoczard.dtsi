@@ -9,7 +9,6 @@
     kscan: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
-
         row-gpios = <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
@@ -34,56 +33,27 @@
         display-name = "Split Ortho 4x6";
         transform = <&transform>;
         kscan = <&kscan>;
+    };
 
-        keys  //                     w   h    x    y     rot    rx    ry
-            = <&key_physical_attrs 100 100    0    0       0     0     0>
-            , <&key_physical_attrs 100 100  100    0       0     0     0>
-            , <&key_physical_attrs 100 100  200    0       0     0     0>
-            , <&key_physical_attrs 100 100  300    0       0     0     0>
-            , <&key_physical_attrs 100 100  400    0       0     0     0>
-            , <&key_physical_attrs 100 100  500    0       0     0     0>
-            , <&key_physical_attrs 100 100  700    0       0     0     0>
-            , <&key_physical_attrs 100 100  800    0       0     0     0>
-            , <&key_physical_attrs 100 100  900    0       0     0     0>
-            , <&key_physical_attrs 100 100 1000    0       0     0     0>
-            , <&key_physical_attrs 100 100 1100    0       0     0     0>
-            , <&key_physical_attrs 100 100 1200    0       0     0     0>
-            , <&key_physical_attrs 100 100    0  100       0     0     0>
-            , <&key_physical_attrs 100 100  100  100       0     0     0>
-            , <&key_physical_attrs 100 100  200  100       0     0     0>
-            , <&key_physical_attrs 100 100  300  100       0     0     0>
-            , <&key_physical_attrs 100 100  400  100       0     0     0>
-            , <&key_physical_attrs 100 100  500  100       0     0     0>
-            , <&key_physical_attrs 100 100  700  100       0     0     0>
-            , <&key_physical_attrs 100 100  800  100       0     0     0>
-            , <&key_physical_attrs 100 100  900  100       0     0     0>
-            , <&key_physical_attrs 100 100 1000  100       0     0     0>
-            , <&key_physical_attrs 100 100 1100  100       0     0     0>
-            , <&key_physical_attrs 100 100 1200  100       0     0     0>
-            , <&key_physical_attrs 100 100    0  200       0     0     0>
-            , <&key_physical_attrs 100 100  100  200       0     0     0>
-            , <&key_physical_attrs 100 100  200  200       0     0     0>
-            , <&key_physical_attrs 100 100  300  200       0     0     0>
-            , <&key_physical_attrs 100 100  400  200       0     0     0>
-            , <&key_physical_attrs 100 100  500  200       0     0     0>
-            , <&key_physical_attrs 100 100  700  200       0     0     0>
-            , <&key_physical_attrs 100 100  800  200       0     0     0>
-            , <&key_physical_attrs 100 100  900  200       0     0     0>
-            , <&key_physical_attrs 100 100 1000  200       0     0     0>
-            , <&key_physical_attrs 100 100 1100  200       0     0     0>
-            , <&key_physical_attrs 100 100 1200  200       0     0     0>
-            , <&key_physical_attrs 100 100    0  300       0     0     0>
-            , <&key_physical_attrs 100 100  100  300       0     0     0>
-            , <&key_physical_attrs 100 100  200  300       0     0     0>
-            , <&key_physical_attrs 100 100  300  300       0     0     0>
-            , <&key_physical_attrs 100 100  400  300       0     0     0>
-            , <&key_physical_attrs 100 100  500  300       0     0     0>
-            , <&key_physical_attrs 100 100  700  300       0     0     0>
-            , <&key_physical_attrs 100 100  800  300       0     0     0>
-            , <&key_physical_attrs 100 100  900  300       0     0     0>
-            , <&key_physical_attrs 100 100 1000  300       0     0     0>
-            , <&key_physical_attrs 100 100 1100  300       0     0     0>
-            , <&key_physical_attrs 100 100 1200  300       0     0     0>
-            ;
+    i2c1: i2c@40003000 { // Assuming the correct I2C instance
+        compatible = "nordic,nrf-twim";
+        status = "okay";
+        clock-frequency = <I2C_BITRATE_FAST>; // Setting to 400 kHz for fast mode
+        sda-pin = <17>; // Using P0.17 as SDA
+        scl-pin = <20>; // Using P0.20 as SCL
+    };
+
+    oled_display_left: oled@3C { // OLED on the left half
+        compatible = "solomon,ssd1306";
+        reg = <0x3C>;
+        label = "OLED_DISPLAY_LEFT";
+        // Assuming no reset pin or define if there is one
+    };
+
+    oled_display_right: oled@3C { // OLED on the right half
+        compatible = "solomon,ssd1306";
+        reg = <0x3C>;
+        label = "OLED_DISPLAY_RIGHT";
+        // Assuming no reset pin or define if there is one
     };
 };
