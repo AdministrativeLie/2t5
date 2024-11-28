@@ -41,19 +41,17 @@
         clock-frequency = <I2C_BITRATE_FAST>; // Setting to 400 kHz for fast mode
         sda-pin = <17>; // Using P0.17 as SDA
         scl-pin = <20>; // Using P0.20 as SCL
-    };
 
-    oled_display_left: oled@3C { // OLED on the left half
-        compatible = "solomon,ssd1306";
-        reg = <0x3C>;
-        label = "OLED_DISPLAY_LEFT";
-        // Assuming no reset pin or define if there is one
-    };
+        oled_left: oled_display@3C { // OLED on the left half
+            compatible = "solomon,ssd1306";
+            reg = <0x3C>;
+            label = "OLED_DISPLAY_LEFT";
+        };
 
-    oled_display_right: oled@3C { // OLED on the right half
-        compatible = "solomon,ssd1306";
-        reg = <0x3C>;
-        label = "OLED_DISPLAY_RIGHT";
-        // Assuming no reset pin or define if there is one
+        oled_right: oled_display@3C_1 { // OLED on the right half with unique node name
+            compatible = "solomon,ssd1306";
+            reg = <0x3C>;
+            label = "OLED_DISPLAY_RIGHT";
+        };
     };
 };
