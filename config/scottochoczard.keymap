@@ -4,19 +4,6 @@
 #include <dt-bindings/zmk/keys.h>
 
 
-#define MAC 0
-#define WINDOWS 1
-#define GAME 2
-#define CODE 3
-#define NUMBER 4
-#define FUNCTION 5
-
-// Behavior Overrides
-&lt {
-    tapping-term-ms = <200>;
-    flavor = "hold-preferred";
-};
-
 / {
     macros {
         
