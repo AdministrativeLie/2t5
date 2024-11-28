@@ -9,10 +9,10 @@
     kscan: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
-        row-gpios = <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
-                    <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
-                    <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
-                    <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        row-gpios = <&pro_micro 15 GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN>,
+                    <&pro_micro 14 GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN>,
+                    <&pro_micro 16 GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN>,
+                    <&pro_micro 10 GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN>;
     };
 
     transform: matrix_transform {
@@ -34,20 +34,19 @@
         kscan = <&kscan>;
     };
 
-    &i2c0 { // Make sure i2c0 is the correct and enabled I2C bus in the base DTS for the board
+    &i2c0 { // Adjust this reference to match the base DTS configuration
         status = "okay";
 
-        oled_display_left: oled@3C { // OLED on the left half
+        oled_display_left: oled@3C {
             compatible = "solomon,ssd1306";
             reg = <0x3C>;
             label = "OLED_DISPLAY_LEFT";
         };
 
-        oled_display_right: oled@3D { // OLED on the right half with a unique address if possible
+        oled_display_right: oled@3D {
             compatible = "solomon,ssd1306";
             reg = <0x3D>;
             label = "OLED_DISPLAY_RIGHT";
         };
     };
 };
-
