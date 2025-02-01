@@ -16,9 +16,12 @@
 
 /delete-node/ &default_kscan;  // Only required if the dongle uses a different board than peripherals
 
-&i2c1 {   // Change from xiao_i2c to i2c1 for Nice!Nano
+&i2c1 {
     status = "okay";
     compatible = "nordic,nrf-twi";
+    
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-names = "default";
 
     sda-pin = <20>;  // Nice!Nano SDA = P0.20
     scl-pin = <17>;  // Nice!Nano SCL = P0.17
@@ -28,7 +31,7 @@
         reg = <0x3c>;
         label = "SSD1306";
         width = <128>;
-        height = <32>;   // Change to 32 if using a 0.91-inch screen
+        height = <32>;   // Change to 32 for a 0.91-inch screen
         segment-offset = <0>;
         page-offset = <0>;
         display-offset = <0>;
@@ -37,5 +40,14 @@
         com-invdir;
         inversion-on;
         prechargep = <0x22>;
+    };
+};
+
+/* Define pin control settings */
+&pinctrl {
+    i2c1_default: i2c1_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 20)>, <NRF_PSEL(TWIM_SCL, 0, 17)>;
+        };
     };
 };
