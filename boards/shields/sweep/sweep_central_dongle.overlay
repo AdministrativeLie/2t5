@@ -14,21 +14,25 @@
     };
 };
 
-/delete-node/ &default_kscan;   // only required if the dongle uses a 
-                                // different board than the peripherals
+/delete-node/ &default_kscan;  // Only required if the dongle uses a different board than peripherals
 
-&xiao_i2c {
+&i2c1 {   // Change from xiao_i2c to i2c1 for Nice!Nano
     status = "okay";
-    
+    compatible = "nordic,nrf-twi";
+
+    sda-pin = <20>;  // Nice!Nano SDA = P0.20
+    scl-pin = <17>;  // Nice!Nano SCL = P0.17
+
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
+        label = "SSD1306";
         width = <128>;
-        height = <64>;
+        height = <32>;   // Change to 32 if using a 0.91-inch screen
         segment-offset = <0>;
         page-offset = <0>;
         display-offset = <0>;
-        multiplex-ratio = <63>;
+        multiplex-ratio = <31>;  // Adjust for 32px height
         segment-remap;
         com-invdir;
         inversion-on;
