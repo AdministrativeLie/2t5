@@ -73,7 +73,7 @@ int zmk_widget_peripheral_battery_status_init(struct zmk_widget_peripheral_batte
     for (int i = ZMK_SPLIT_BLE_PERIPHERAL_COUNT - 1; i >= 0; i--) {
         battery_widget_objects[i].battery_label = lv_label_create(widget->obj);
 
-        lv_obj_set_style_text_font(battery_widget_objects[i].battery_label, &lv_font_montserrat_20, 0); // Large Font
+        lv_obj_set_style_text_font(battery_widget_objects[i].battery_label, &lv_font_montserrat_12, 0); // Large Font
         lv_obj_align(battery_widget_objects[i].battery_label, LV_ALIGN_CENTER, initial_x_offset - i * 50, 0);
     }
 
