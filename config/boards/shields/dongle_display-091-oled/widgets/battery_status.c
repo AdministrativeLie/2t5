@@ -66,15 +66,15 @@ ZMK_SUBSCRIPTION(widget_battery_status, zmk_peripheral_battery_state_changed);
 int zmk_widget_peripheral_battery_status_init(struct zmk_widget_peripheral_battery_status *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
 
-    lv_obj_set_size(widget->obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+    lv_obj_set_size(widget->obj, 128, 32);  // Fullscreen widget
 
-    // Calculate initial x-offset for the rightmost label
-    int initial_x_offset = (ZMK_SPLIT_BLE_PERIPHERAL_COUNT - 1) * 35;
+    int initial_x_offset = (ZMK_SPLIT_BLE_PERIPHERAL_COUNT - 1) * 50;
 
-    for (int i = ZMK_SPLIT_BLE_PERIPHERAL_COUNT - 1; i >= 0; i--) {  // Iterate backwards
+    for (int i = ZMK_SPLIT_BLE_PERIPHERAL_COUNT - 1; i >= 0; i--) {
         battery_widget_objects[i].battery_label = lv_label_create(widget->obj);
 
-        lv_obj_align(battery_widget_objects[i].battery_label, LV_ALIGN_LEFT_MID, initial_x_offset - i * 35, 0);
+        lv_obj_set_style_text_font(battery_widget_objects[i].battery_label, &lv_font_montserrat_20, 0); // Large Font
+        lv_obj_align(battery_widget_objects[i].battery_label, LV_ALIGN_CENTER, initial_x_offset - i * 50, 0);
     }
 
     sys_slist_append(&widgets, &widget->node);
@@ -82,6 +82,7 @@ int zmk_widget_peripheral_battery_status_init(struct zmk_widget_peripheral_batte
     widget_battery_status_init();
     return 0;
 }
+
 
 lv_obj_t *zmk_widget_peripheral_battery_status_obj(struct zmk_widget_peripheral_battery_status *widget) {
     return widget->obj;
