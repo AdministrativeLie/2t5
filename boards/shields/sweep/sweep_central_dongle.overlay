@@ -23,19 +23,16 @@
     pinctrl-0 = <&i2c1_default>;
     pinctrl-names = "default";
 
-    sda-pin = <20>;  // Nice!Nano SDA = P0.20
-    scl-pin = <17>;  // Nice!Nano SCL = P0.17
-
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
         label = "SSD1306";
         width = <128>;
-        height = <32>;   // Change to 32 for a 0.91-inch screen
+        height = <32>;   // Adjust for 0.91-inch display
         segment-offset = <0>;
         page-offset = <0>;
         display-offset = <0>;
-        multiplex-ratio = <31>;  // Adjust for 32px height
+        multiplex-ratio = <31>;
         segment-remap;
         com-invdir;
         inversion-on;
