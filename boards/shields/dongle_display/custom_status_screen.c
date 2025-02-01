@@ -18,19 +18,21 @@ lv_obj_t *zmk_display_status_screen() {
     lv_obj_t *screen;
 
     screen = lv_obj_create(NULL);
+    lv_obj_set_size(screen, 128, 32);  // Ensure screen size matches OLED
 
-    // Make sure the screen is properly scaled
-    lv_obj_set_size(screen, 128, 32);  // Set display size to match OLED
+    // 🔹 Increase widget size to fill most of the height
+    int widget_width = 60;  // Each widget takes ~half the screen width
+    int widget_height = 28; // Almost full screen height
 
-    // Output Status Widget (Connection Type)
+    // 🔹 Output Status Widget (Connection Type)
     zmk_widget_output_status_init(&output_status_widget, screen);
-    lv_obj_set_size(zmk_widget_output_status_obj(&output_status_widget), 128, 10); // Scale widget
-    lv_obj_align(zmk_widget_output_status_obj(&output_status_widget), LV_ALIGN_TOP_MID, 0, 2); // Move slightly down
+    lv_obj_set_size(zmk_widget_output_status_obj(&output_status_widget), widget_width, widget_height);
+    lv_obj_align(zmk_widget_output_status_obj(&output_status_widget), LV_ALIGN_LEFT_MID, 4, 0);  // Left side
 
-    // Battery Status Widget
+    // 🔹 Battery Status Widget
     zmk_widget_dongle_battery_status_init(&dongle_battery_status_widget, screen);
-    lv_obj_set_size(zmk_widget_dongle_battery_status_obj(&dongle_battery_status_widget), 128, 10); // Scale widget
-    lv_obj_align(zmk_widget_dongle_battery_status_obj(&dongle_battery_status_widget), LV_ALIGN_BOTTOM_MID, 0, -2); // Move slightly up
+    lv_obj_set_size(zmk_widget_dongle_battery_status_obj(&dongle_battery_status_widget), widget_width, widget_height);
+    lv_obj_align(zmk_widget_dongle_battery_status_obj(&dongle_battery_status_widget), LV_ALIGN_RIGHT_MID, -4, 0);  // Right side
 
     return screen;
 }
