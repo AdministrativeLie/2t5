@@ -28,7 +28,7 @@ lv_obj_t *zmk_display_status_screen() {
     screen = lv_obj_create(NULL);
 
     lv_style_init(&global_style);
-    lv_style_set_text_font(&global_style, &lv_font_unscii_8);
+    lv_style_set_text_font(&global_style, &lv_font_unscii_12);
     lv_style_set_text_letter_space(&global_style, 1);
     lv_style_set_text_line_space(&global_style, 1);
     lv_obj_add_style(screen, &global_style, LV_PART_MAIN);
@@ -47,7 +47,7 @@ lv_obj_t *zmk_display_status_screen() {
     // // lv_obj_align_to(zmk_widget_layer_status_obj(&layer_status_widget), zmk_widget_bongo_cat_obj(&bongo_cat_widget), LV_ALIGN_BOTTOM_LEFT, 0, 5);
 
     zmk_widget_peripheral_battery_status_init(&peripheral_battery_status_widget, screen);
-    lv_obj_align(zmk_widget_peripheral_battery_status_obj(&peripheral_battery_status_widget), LV_ALIGN_BOTTOM_RIGHT, 0, 0);
+    lv_obj_align(zmk_widget_peripheral_battery_status_obj(&peripheral_battery_status_widget), LV_ALIGN_CENTER, 0, 0);
 
     return screen;
 }
